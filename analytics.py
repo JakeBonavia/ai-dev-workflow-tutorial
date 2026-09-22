@@ -1,0 +1,21 @@
+import pandas as pd
+
+REQUIRED_COLUMNS = {
+    "date", "order_id", "product", "category", "region",
+    "quantity", "unit_price", "total_amount",
+}
+
+
+def load_sales_data(path: str) -> pd.DataFrame:
+    df = pd.read_csv(path)
+
+    missing = REQUIRED_COLUMNS - set(df.columns)
+    if missing:
+        raise ValueError(f"sales data is missing required columns: {sorted(missing)}")
+
+    try:
+        df["date"] = pd.to_datetime(df["date"])
+    except (ValueError, TypeError) as e:
+        raise ValueError(f"sales data 'date' column could not be parsed: {e}")
+
+    return df
