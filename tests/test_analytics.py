@@ -50,3 +50,11 @@ def test_total_sales(sample_df):
 
 def test_total_orders(sample_df):
     assert analytics.total_orders(sample_df) == 10
+
+
+def test_sales_by_day(sample_df):
+    result = analytics.sales_by_day(sample_df)
+
+    assert list(result.columns) == ["date", "total_amount"]
+    assert result["date"].is_monotonic_increasing
+    assert result["total_amount"].tolist() == [150, 230, 260, 80, 80]

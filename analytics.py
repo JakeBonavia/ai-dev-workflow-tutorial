@@ -27,3 +27,8 @@ def total_sales(df: pd.DataFrame) -> float:
 
 def total_orders(df: pd.DataFrame) -> int:
     return len(df)
+
+
+def sales_by_day(df: pd.DataFrame) -> pd.DataFrame:
+    result = df.groupby(df["date"].dt.normalize())["total_amount"].sum().reset_index()
+    return result.sort_values("date").reset_index(drop=True)
