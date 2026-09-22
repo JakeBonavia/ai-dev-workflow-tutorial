@@ -17,4 +17,10 @@ except ValueError as e:
     st.error(str(e))
     st.stop()
 
-st.write(f"Loaded {len(sales_df)} sales records.")
+def format_currency(value: float) -> str:
+    return f"${value:,.0f}"
+
+
+col1, col2 = st.columns(2)
+col1.metric("Total Sales", format_currency(analytics.total_sales(sales_df)))
+col2.metric("Total Orders", f"{analytics.total_orders(sales_df):,}")

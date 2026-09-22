@@ -19,3 +19,11 @@ def load_sales_data(path: str) -> pd.DataFrame:
         raise ValueError(f"sales data 'date' column could not be parsed: {e}")
 
     return df
+
+
+def total_sales(df: pd.DataFrame) -> float:
+    return df["total_amount"].sum()
+
+
+def total_orders(df: pd.DataFrame) -> int:
+    return len(df)

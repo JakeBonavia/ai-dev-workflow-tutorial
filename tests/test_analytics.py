@@ -42,3 +42,11 @@ def test_load_sales_data_missing_column(tmp_path):
 
     with pytest.raises(ValueError):
         analytics.load_sales_data(str(csv_path))
+
+
+def test_total_sales(sample_df):
+    assert analytics.total_sales(sample_df) == 800
+
+
+def test_total_orders(sample_df):
+    assert analytics.total_orders(sample_df) == 10
