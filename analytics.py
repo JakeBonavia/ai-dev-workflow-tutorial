@@ -32,3 +32,13 @@ def total_orders(df: pd.DataFrame) -> int:
 def sales_by_day(df: pd.DataFrame) -> pd.DataFrame:
     result = df.groupby(df["date"].dt.normalize())["total_amount"].sum().reset_index()
     return result.sort_values("date").reset_index(drop=True)
+
+
+def sales_by_category(df: pd.DataFrame) -> pd.DataFrame:
+    result = df.groupby("category")["total_amount"].sum().reset_index()
+    return result.sort_values("total_amount", ascending=False).reset_index(drop=True)
+
+
+def sales_by_region(df: pd.DataFrame) -> pd.DataFrame:
+    result = df.groupby("region")["total_amount"].sum().reset_index()
+    return result.sort_values("total_amount", ascending=False).reset_index(drop=True)

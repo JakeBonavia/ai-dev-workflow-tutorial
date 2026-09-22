@@ -58,3 +58,19 @@ def test_sales_by_day(sample_df):
     assert list(result.columns) == ["date", "total_amount"]
     assert result["date"].is_monotonic_increasing
     assert result["total_amount"].tolist() == [150, 230, 260, 80, 80]
+
+
+def test_sales_by_category(sample_df):
+    result = analytics.sales_by_category(sample_df)
+
+    assert list(result.columns) == ["category", "total_amount"]
+    assert result["category"].tolist() == ["Electronics", "Accessories", "Audio"]
+    assert result["total_amount"].tolist() == [530, 180, 90]
+
+
+def test_sales_by_region(sample_df):
+    result = analytics.sales_by_region(sample_df)
+
+    assert list(result.columns) == ["region", "total_amount"]
+    assert result["region"].tolist() == ["South", "North"]
+    assert result["total_amount"].tolist() == [430, 370]

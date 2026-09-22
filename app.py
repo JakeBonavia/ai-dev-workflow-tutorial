@@ -41,3 +41,32 @@ trend_fig = go.Figure(
 )
 trend_fig.update_layout(title="Sales Trend Over Time", xaxis_title="Date", yaxis_title="Sales")
 st.plotly_chart(trend_fig, use_container_width=True)
+
+category_sales = analytics.sales_by_category(sales_df)
+region_sales = analytics.sales_by_region(sales_df)
+
+col3, col4 = st.columns(2)
+
+with col3:
+    category_fig = go.Figure(
+        go.Bar(
+            x=category_sales["category"],
+            y=category_sales["total_amount"],
+            marker_color=ACCENT_COLOR,
+            hovertemplate="%{x}<br>$%{y:,.0f}<extra></extra>",
+        )
+    )
+    category_fig.update_layout(title="Sales by Category", xaxis_title="Category", yaxis_title="Sales")
+    st.plotly_chart(category_fig, use_container_width=True)
+
+with col4:
+    region_fig = go.Figure(
+        go.Bar(
+            x=region_sales["region"],
+            y=region_sales["total_amount"],
+            marker_color=ACCENT_COLOR,
+            hovertemplate="%{x}<br>$%{y:,.0f}<extra></extra>",
+        )
+    )
+    region_fig.update_layout(title="Sales by Region", xaxis_title="Region", yaxis_title="Sales")
+    st.plotly_chart(region_fig, use_container_width=True)
